@@ -1,0 +1,68 @@
+{
+  "name": "p2pchat",
+  "description": "P2PChat",
+  "author": "miksme",
+  "license": "MIT",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "private": true,
+  "scripts": {
+    "build": "ng build --configuration production --aot true --output-hashing none && cd build && browserify ./runtime.js ./polyfills.js ./scripts.js ./main.js | uglifyjs > bundle.js && rm index.html runtime.js scripts.js polyfills.js main.js && cd .."
+  },
+  "dependencies": {
+    "@angular/animations": "^13.0.*",
+    "@angular/cdk": "^13.0.*",
+    "@angular/common": "^13.0.*",
+    "@angular/compiler": "^13.0.*",
+    "@angular/core": "^13.0.*",
+    "@angular/forms": "^13.0.*",
+    "@angular/material": "^13.0.*",
+    "@angular/platform-browser": "^13.0.*",
+    "@angular/platform-browser-dynamic": "^13.0.*",
+    "@angular/router": "^13.0.*",
+
+    "@ng-bootstrap/ng-bootstrap": "^10.0.*",
+    "@popperjs/core": "*",
+    "bootstrap": "*",
+    "jquery": "*",
+
+    "eventemitter3": "^4.0.*",
+    "simple-peer": "^9.*",
+    "socket.io": "^4.4.*",
+    "socket.io-client": "^4.4.*",
+    "streamsaver": "^2.0.*",
+
+    "rxjs": "^7.4.*",
+    "core-js": "*",
+    "web-streams-polyfill": "^3.2.*",
+    "zone.js": "^0.11.*"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^13.0.3",
+    "@angular-devkit/schematics": "^13.0.*",
+    "@angular-eslint/schematics": "^13.0.*",
+    "@angular/cli": "^13.0.*",
+    "@angular/compiler-cli": "^13.0.*",
+    "@types/bootstrap": "*",
+    "@types/jquery": "*",
+    "@types/node": "*",
+    "@types/simple-peer": "^9.*",
+    "@types/streamsaver": "^2.0.*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "eslint": "*",
+    "eslint-config-standard": "*",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-node": "*",
+    "eslint-plugin-promise": "*",
+    "jasmine": "*",
+    "prettier": "*",
+    "ts-node": "*",
+    "typescript": "^4.2.4",
+    "browserify": "17.0.0",
+    "uglifyjs": "2.4.11-node8"
+  },
+  "browser": {
+    "stream": false
+  }
+}

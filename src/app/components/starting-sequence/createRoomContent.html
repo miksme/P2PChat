@@ -1,0 +1,85 @@
+
+  <div class="modal-header">
+    <h4 class="modal-title">Create a room</h4>
+    <button type="button" class="close" aria-label="Close" (click)="showRoomOptions()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form
+        #f3="ngForm"
+        novalidate
+        >
+        <div class="form-group">
+
+          <label for="name" class="col-form-label">Room type:</label>
+          <select class="form-select" aria-label="P2P Mesh" (change)="changeRoomType(selectRoomType.value)" #selectRoomType name="roomtype">
+            <option value="0" selected>P2P Mesh</option>
+            <option value="1">SFU Server</option>
+          </select>
+        </div>
+          <div class="form-group">
+            <label for="name" class="col-form-label">Name:</label>
+            <input
+                  ngbAutofocus
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  [(ngModel)]="createRoomForm.name"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  #name="ngModel"
+                />
+          </div>
+
+          <div class="alert-danger m-2 p-2" *ngIf="name.errors">
+            <div *ngIf="name.errors.required">Name is required</div>
+            <div *ngIf="name.errors.minlength">
+              Name must be at least 3 characters
+            </div>
+            <div *ngIf="name.errors.maxlength">
+              Name must be at most 20 characters
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="col-form-label">Password:</label>
+
+            <div class="d-flex">
+              <button class="btn btn-primary p-1 ps-2 pe-2 me-2" (click)="generatePassword()">Generate</button>
+              <input
+                  type="text"
+                  class="form-control"
+                  name="pwd"
+                  [(ngModel)]="createRoomForm.pwd"
+                  minlength="0"
+                  maxlength="32"
+                  #pwd="ngModel"
+                />
+            </div>
+
+          </div>
+
+          <div class="alert-danger m-2 p-2" *ngIf="pwd.errors">
+            <div *ngIf="pwd.errors.maxlength">
+              Password must be at most 32 characters
+            </div>
+          </div>
+
+
+          <div class="alert-danger m-2 p-2" *ngIf="hasError">
+            Failed: {{ErrorDesc}}
+          </div>
+
+          <div class="form-group">
+            <label for="maxUserRange" class="form-label">Max users in one room: {{createRoomForm.maxUsers}}</label>
+            <input type="range" class="form-range" min="2" max="20" id="maxUserRange" [(ngModel)]="createRoomForm.maxUsers">
+          </div>
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="!f3.form.valid" (click)="getCreateRoom();">
+      Do the thing
+    </button>
+  </div>

@@ -1,0 +1,22 @@
+<div class="Msg w-100 p-2 d-flex WhiteText"  title="ID: {{data.id}}" >
+  <div class="me-2 UserAvatar">
+    <img src="{{data.pfpLoc}}">
+  </div>
+  <div>
+      <div class='d-flex'>
+          <a tabindex="0" type="button" data-toggle="popover" data-trigger="focus" attr.userid="{{data.id}}" class="msg-user">
+              {{data.user}}
+          </a>
+          <div class="ms-3">  {{data.time+' '}} <span *ngIf="data.special!=''"  class="badge badge-secondary">{{data.special}}</span></div>
+          <div class="ms-1" style="color: grey !important;">({{data.id}})</div>
+      </div>
+      <div class="msg-text" [innerHtml]="data.msg"  style="display:block">
+      </div>
+      <div [innerHtml]="data.other" class="mt-1 d-flex flex-column">
+
+      </div>
+      <div [style.display]="this.useOtherObjs?'block':'none'" #otherData class="mt-1 d-flex flex-column">
+
+      </div>
+  </div>
+</div>

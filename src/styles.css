@@ -1,0 +1,192 @@
+/*
+html, body {
+  width: 100%;
+  height: 100%;
+
+  color: white;
+
+  min-width: 200px;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.BlackText {
+color: black;
+}
+
+.Msg > div > * {
+display: inline;
+}
+.Msg > p {
+padding-left: 10px;
+word-break: break-all;
+}
+.Msg:hover{
+  background-color: rgb(41, 41, 41);
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.OverflowSroll{
+  overflow-x: auto;
+  max-height: 100% !important;
+}
+
+.VarCenter {
+  height: 48px;
+  align-items: center;
+}
+.VarSpace {
+  height: 48px;
+  align-items: center;
+  justify-content:space-between;
+  overflow: hidden;
+}
+
+.MsgHolder {
+    background-color: rgb(61, 61, 61);
+}
+
+.ActiveUser:hover {
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+.ActiveServer {
+  background-color: rgb(32, 32, 32);
+}
+
+.UserAvatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.RedClosable{
+  border-color: transparent;
+  background-color: transparent;
+  min-width: 40px;
+  color: white;
+  transition: color 0.5s;
+  transition: font-size 1s;
+}
+.RedClosable:hover{
+  color: red;
+  font-size: 24px;
+}
+
+#RoomHolder {
+  overflow-x: hidden;
+}
+#UserHolder {
+  overflow-x: hidden;
+}
+.GroupBtn {
+  height: 54px;
+  min-height: 54px;
+}
+.TextWrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.HelpBoxImgParent {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  border: 2px solid #555;
+
+}
+.AbsCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#HelpBoxUserImg{
+  height: 60px; width:60px; border-radius:50%
+}
+#HelpBox {
+  width: 14rem; background-color: #555;
+  color: white;
+}
+.ABitDark {
+  background-color: #555;
+}
+
+.ArHolderLeft{
+  -webkit-transition: left 0.2s ease-out;
+  -moz-transition: left 0.2s ease-out;
+  transition: left 0.2s ease-out;
+  -webkit-transition: right 0.2s ease-out;
+  -moz-transition: right 0.2s ease-out;
+  transition: right 0.2s ease-out;
+
+  align-items: center;
+  justify-content: flex-start;
+}
+.ArHolderRight{
+  -webkit-transition: left 0.2s ease-out;
+  -moz-transition: left 0.2s ease-out;
+  transition: left 0.2s ease-out;
+  -webkit-transition: right 0.2s ease-out;
+  -moz-transition: right 0.2s ease-out;
+  transition: right 0.2s ease-out;
+
+  align-items: center;
+  justify-content: flex-end;
+}
+.ArrowBtn{
+  margin: 4px;
+  height: 40px;
+  width: 40px;
+  border: 2px solid #333;
+  background-color: #555;
+  color: white;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.col-0 {
+  min-width: 20px; flex: 0 0 2%; max-width: 40px;
+}
+.DisplayOverwrite {
+  display: none !important;
+}
+
+.VidContainer {
+
+}
+
+.VidContainer > video {
+  width: 240px;
+  height: 180px;
+}
+.VidHolder {
+  height: 280px;
+}
+.Msg {
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: break-spaces;
+  display: inline;
+}
+.msg-text {
+  line-height: 1.375rem;
+  text-indent: 0;
+}
+*/

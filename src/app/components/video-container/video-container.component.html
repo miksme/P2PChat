@@ -1,0 +1,17 @@
+<div (contextmenu)="openContextMenu($event)" class="p-2 m-2 " style="min-width: 100px; height: auto; border: 4px green solid; border-radius: 10px;" [style.display]="this.forcedDisplay">
+  <div *ngIf="!this.streamActive">
+
+    <div class="d-flex p-0 VarCenter" [style.height]="this.videoHeight" [style.width]="this.videoWidth">
+      <img src="{{this.user.avatarLoc}}" style="width: 100%; height: 100%; object-fit: contain;" [style.height]="this.videoHeight" [style.width]="this.videoWidth">
+    </div>
+  </div>
+  <div [style.display]="this.streamActive?'block':'none'">
+    <video [srcObject]="vidObj"  [style.height]="this.videoHeight" [style.width]="this.videoWidth" style="object-fit: cover;" autoplay controls #videoPlayer></video>
+  </div>
+  <div *ngIf="(!this.streamActive && !this.forcedStream)">
+    <button (click)="StartWatching()" class="btn btn-primary">Watch stream</button>
+  </div>
+  <div *ngIf="(this.streamActive && !this.forcedStream)">
+    <button (click)="StopWatching()" class="btn btn-primary">Close stream</button>
+  </div>
+</div>

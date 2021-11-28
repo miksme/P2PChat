@@ -1,0 +1,13 @@
+.Msg {
+  color: white;
+}
+.Msg > div > * {
+  display: inline;
+  }
+  .Msg > p {
+  padding-left: 10px;
+  word-break: break-all;
+  }
+  .Msg:hover{
+    background-color: rgb(41, 41, 41);
+  }

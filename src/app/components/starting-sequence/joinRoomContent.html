@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4 class="modal-title">Join a room</h4>
+    <button type="button" class="close" aria-label="Close" (click)="showRoomOptions()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form
+        #f4="ngForm"
+        novalidate
+        >
+          <div class="form-group">
+            <label for="ID" class="col-form-label">ID:</label>
+            <input
+                  ngbAutofocus
+                  type="text"
+                  class="form-control"
+                  name="ID"
+                  [(ngModel)]="joinRoomForm.ID"
+                  required
+                  #ID="ngModel"
+                />
+          </div>
+          <div class="alert-danger m-2 p-2" *ngIf="ID.errors">
+            <div *ngIf="ID.errors.required">ID is required</div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="col-form-label">Password:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="pwd"
+              [(ngModel)]="joinRoomForm.pwd"
+              minlength="0"
+              maxlength="32"
+              #pwd="ngModel"
+            />
+          </div>
+
+          <div class="alert-danger m-2 p-2" *ngIf="pwd.errors">
+            <div *ngIf="pwd.errors.maxlength">
+              Password must be at most 32 characters
+            </div>
+          </div>
+
+
+          <div class="alert-danger m-2 p-2" *ngIf="hasError">
+            Failed: {{ErrorDesc}}
+          </div>
+
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="!f4.form.valid" (click)="getJoinRoom()">
+      Do the thing
+    </button>
+  </div>

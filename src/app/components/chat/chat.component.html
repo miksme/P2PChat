@@ -1,0 +1,103 @@
+<ng-template modalArea></ng-template>
+<div id="contextMenu" class="WhiteText contextMenu p-2">
+  <button class="WhiteText btn-link p-1 me-1 mb-1 btn btn-secondary w-100" (click)="contextMenuCopyID();">Copy user ID</button>
+  <div [style.display]="contextMenuDisplayVideoStuff?'block':'none'">
+    <button class="WhiteText btn-link me-1 mb-1 p-1 w-100 btn btn-secondary" (click)="contextMenuMuteUser();" id="contextMenuMute">Mute</button>
+    <div>
+      <div class="p-1">
+        User volume:
+      </div>
+      <input class="w-100" type="range" min="0" max="100" step="1" value="100" (input)="contextMenuChangeUserVolume();" id="contextMenuVolume">
+    </div>
+  </div>
+</div>
+<div (mousedown)="closeContextMenu();" class="row no-gutters" style="height: 100%" [style.display]="this.Mgr?.CurrentOpenRoom?'flex':'none'" FileDnd (fileDropped)="onFileDropped($event)">
+  <div class="col bg-light h-100 d-flex flex-column ps-12 pe-0" >
+        <div class="ActiveServer WhiteText p-1 d-flex flex-collumn">
+          <div>
+              <div class="ms-2">
+                <h5>
+                  {{this.Mgr?.CurrentOpenRoom?.roomName}} ({{this.Mgr?.CurrentOpenRoom?.users.size+1}}/{{this.Mgr?.CurrentOpenRoom?.roomUserLimit.toString()}})
+                </h5>
+              </div>
+              <div class="ms-2 mb-2">
+                <input type="text" id="_copyText" style="display: none;">
+                <div>
+                  ID: <span #IDfield (click)="selectElementText(IDfield, undefined)">{{this.Mgr?.CurrentOpenRoom?.roomID}}</span>
+                </div>
+                <div *ngIf="!(this.Mgr?.CurrentOpenRoom?.roomPWD==='')">
+                  Password: <span #PWDfield (click)="selectElementText(PWDfield, undefined)">{{this.Mgr?.CurrentOpenRoom?.roomPWD}}</span>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="generateLink()">Copy link</button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="ActiveServer WhiteText p-1 d-flex flex-collumn">
+          <div *ngIf="!AreOthersInLocalCall && !IsInLocalCall" class="w-100 d-flex">
+            <button class="btn btn-primary" (click)="MakeCall(true, false)">Audio</button>
+            <button class="btn btn-primary" (click)="MakeCall(true, true)">Audio + Video</button>
+          </div>
+          <div [style.display]="(AreOthersInLocalCall||IsInLocalCall)?'block':'none'" class="w-100">
+            <div class="d-flex w-100">
+              <div class="w-100 d-flex" style="overflow-x: auto;">
+                <ng-template videoArea></ng-template>
+              </div>
+
+              <ul *ngIf="IsInLocalCall" class="list-group" style="overflow-y: auto; max-width: 200px; min-width: 120px; width: 10%; max-height: 180px;"> <!--</ul> *ngIf="this.IDtoVideoContainer.size>2" -->
+                <li class="list-group-item" class="list-group-item p-2">
+                  <button class="btn btn-primary TextWrap" (click)="this.showContentOfUser(this.Mgr?.CurrentOpenRoom?.userID)">Self</button>
+                </li>
+                <li class="list-group-item" class="list-group-item p-2">
+                  <button class="btn btn-primary TextWrap" (click)="this.showContentOfUser('')">All</button>
+                </li>
+                <li *ngFor="let user of this.getListWithoutLocal()" class="list-group-item p-2">
+                  <button class="btn btn-primary TextWrap" (click)="this.showContentOfUser(user[0])">{{user[1]}}</button>
+                </li>
+              </ul>
+            </div>
+            <div class="d-flex w-100 flex-collumn">
+              <div *ngIf="!IsInLocalCall" class="d-flex justify-content-center w-100">
+                <button class="btn btn-primary" (click)="MakeCall(true, false)">Join</button>
+              </div>
+              <div *ngIf="IsInLocalCall" class="d-flex justify-content-center w-100">
+                <button class="btn btn-primary" (click)="HandleScreenshare()">{{ !this.IsScreensharing?'Start':'Stop'}} screenshare</button>
+                <button class="btn btn-primary" (click)="HandleCamera()">{{ !this.callHasCam?'Unpause':'Pause'}} video</button>
+                <button class="btn btn-primary" (click)="HandleMicrophone()">{{ !this.callHasMic?'Unmute':'Mute'}} audio</button>
+                <button class="btn btn-primary" (click)="LeaveCall()">Leave</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;" class="OverflowSroll MsgHolder" id="msgArea">
+            <div class="AbsCenter w-100">
+              <div class="m-3 w-100">
+                <ng-template msgArea></ng-template>
+              </div>
+            </div>
+        </div>
+        <div class="bg-dark d-flex flex-column pb-1 pt-1" style="align-items: center;max-height:400px" id="InputFieldParent">
+          <div class="w-100 d-flex WhiteText" *ngIf="this.nextMsgFiles?.length > 0">
+              {{this.nextMsgFiles?.length}} file{{this.nextMsgFiles?.length===1?'':'s'}} attached
+              <button class="btn btn-outline-secondary btn-sm" (click)="this.removeAttachedFiles()">Remove</button>
+          </div>
+          <div #tinput type="text" contenteditable="true" (input)="msg=$event.target.textContent" (keydown)="typeKeyDown($event)" (paste)="destroyPaste($event,tinput)" class="m-1 input w-100 ms-2 me-1 msg-text" style="resize: none; background-color: #444; color:white; border: none; max-height:280px; overflow:auto;" placeholder="Message" id="msgSendArea"></div>
+        </div>
+  </div>
+  <div class="col-3 bg-dark-secondary d-flex flex-column UserHolderCol ps-12 pe-12" [style.display]="(this.Mgr?.CurrentOpenRoom?true:false)?'block':'none !important'" style="transition: flex 0.2s ease-out;">
+    <div class="d-flex flex-column h-100">
+      <div style="flex-grow:1;" class="OverflowSroll">
+          <div id="UserHolder">
+            <ng-template userArea></ng-template>
+          </div>
+      </div>
+      <div style="height: 54px; min-height: 54px;">
+        <ng-template thisUser></ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<!--[textContent]="msg" (input)="msg=$event.target.textContent"-->

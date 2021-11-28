@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{_title}}</h4>
+  </div>
+  <div class="modal-body msg-text">
+    {{this._innerText}}
+  </div>
+  <div class="modal-footer">
+    <button [style.display]="(this._cancelBtn !== undefined)?'block':'none'" class="btn btn-secondary" (click)="cancel()">
+      {{this._cancelBtn}}
+    </button>
+    <button class="btn btn-primary" (click)="nextPage()">
+      {{this._okButton}}
+    </button>
+  </div>

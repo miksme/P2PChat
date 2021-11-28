@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="modal-title">Quick Info</h4>
+  </div>
+  <div class="modal-body">
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span> What is this? </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          A P2P chatting webapp that almost supports advanced features like server-side code and message history. On that note - yes, your PC will melt if you try to connect more than 3 friends to a call (fixed as of v0.4), but thankfully you dont even have 2 :)
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span> What does that mean? </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+        Find out yourself
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span>Pluses</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <ul class="list-unstyled">
+            <li>Is (mostly) secure**</li>
+            <li>Does not crash my server</li>
+            <li>Everything can be blamed on the user</li>
+            <li>Leaks your IP address</li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span>Minuses</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <ul class="list-unstyled">
+            <li>None</li>
+            <li>Doesn't work half the time</li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="showUsername()">Ok</button>
+  </div>

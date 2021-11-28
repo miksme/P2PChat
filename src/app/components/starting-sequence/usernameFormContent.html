@@ -1,0 +1,233 @@
+<div class="modal-header">
+    <h4 class="modal-title">User config</h4>
+  </div>
+  <div class="modal-body">
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-uinit">
+      <ngb-panel id="ngb-panel-uinit">
+        <ng-template ngbPanelTitle>
+          <span> General settings </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <form
+          novalidate
+          >
+          <div class="form-group">
+            <label for="username" class="col-form-label">Username:</label>
+            <input
+                  ngbAutofocus
+                  type="text"
+                  class="form-control"
+                  name="username"
+                  [(ngModel)]="userForm.username"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  #username="ngModel"
+                />
+          </div>
+          <div class="alert-danger m-2 p-2" *ngIf="username.errors">
+            <div *ngIf="username.errors.required">Username is required</div>
+            <div *ngIf="username.errors.minlength">
+              Username must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              Username must be at most 20 characters
+            </div>
+          </div>
+          <div class="form-group mt-2 mb-2">
+            <label for="pfp" class="col-form-label">(Optional) discord link to PFP:</label>
+            <input
+                  type="text"
+                  class="form-control"
+                  name="pfp"
+                  [(ngModel)]="userForm.pfpLoc"
+                />
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cb0" [(ngModel)]="userForm.showPFPs">
+            <label class="form-check-label" for="cb0">
+              Display user PFPs
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cb1" [(ngModel)]="userForm.displayLink">
+            <label class="form-check-label" for="cb1">
+              Display content from links (just a bit dangerous)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cb2" [disabled]="!userForm.allowFileTransfer" [(ngModel)]="userForm.displayUserContent">
+            <label class="form-check-label" for="cb2">
+              Display content from users (and so is this)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cb3" [disabled]="!userForm.displayUserContent" [(ngModel)]="userForm.autoDownloadUserContent">
+            <label class="form-check-label" for="cb3">
+              Automatically download content from users (small images, etc.)
+            </label>
+          </div>
+
+          </form>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span> File transfer </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <form
+          novalidate
+          >
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="ft_cb1" [(ngModel)]="userForm.allowFileTransfer">
+            <label class="form-check-label" for="ft_cb1">
+              Allow file download and upload
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="ft_mfa" class="form-label">Max active file actions: {{userForm.maxActiveFileActions}}</label>
+            <input type="range" class="form-range" min="2" max="20" name="ft_mfa" [disabled]="!(userForm.allowFileTransfer)" [(ngModel)]="userForm.maxActiveFileActions">
+          </div>
+          <div class="form-group">
+            <label for="ft_fdt" class="form-label">After how many seconds cancel the file action if no reply was recieved: {{userForm.fileTimeout}}</label>
+            <input type="range" class="form-range" min="5" max="120" name="ft_fdt" [disabled]="!(userForm.allowFileTransfer)" [(ngModel)]="userForm.fileTimeout">
+          </div>
+          <br/>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="ft_cb2" [disabled]="!(userForm.allowFileTransfer)" [(ngModel)]="userForm.accelerateLargeFileTranfer">
+            <label class="form-check-label" for="ft_cb2">
+              Download large files faster* (does not (and should not) really affect things if your/server's net is slower than ~2mb/s)
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="ft_lfb" class="form-label">Boundary for files to be considered large: {{userForm.largeFileBoundary}} MB</label>
+            <input type="range" class="form-range" min="10" max="250" name="ft_lfb" [disabled]="!(userForm.allowFileTransfer&&userForm.accelerateLargeFileTranfer)" [(ngModel)]="userForm.largeFileBoundary">
+          </div>
+          <div class="form-group">
+            <label for="ft_ppl" class="form-label">How many peers to use for large downloads (more = faster, more expensive): {{userForm.peersPerLargeDownload}}</label>
+            <input type="range" class="form-range" min="1" max="4" name="ft_ppl" [disabled]="!(userForm.allowFileTransfer&&userForm.accelerateLargeFileTranfer)" [(ngModel)]="userForm.peersPerLargeDownload">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="ft_cb3" [disabled]="!(userForm.allowFileTransfer&&userForm.accelerateLargeFileTranfer)" [(ngModel)]="userForm.scalePeerAmount">
+            <label class="form-check-label" for="ft_cb3">
+              Scale amount of peers used for large file downloads with file size
+            </label>
+          </div>
+          </form>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span>Networking</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="n_cb1" [(ngModel)]="userForm.useSTUN">
+            <label class="form-check-label" for="n_cb1">
+              Use a STUN server
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="n_cb2" [disabled]="!(userForm.useSTUN)" [(ngModel)]="userForm.useCustomSTUN">
+            <label class="form-check-label" for="n_cb2">
+              Use a custom STUN server
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="n_stun" class="col-form-label">Custom STUN server:</label>
+            <input
+                  type="text"
+                  class="form-control"
+                  name="n_stun"
+                  [(ngModel)]="userForm.customSTUNurl"
+                  [disabled]="!(userForm.useSTUN && userForm.useCustomSTUN)"
+                  minlength="5"
+                  #n_stun="ngModel"
+                />
+          </div>
+          <div class="alert-danger m-2 p-2" *ngIf="n_stun.errors">
+            <div *ngIf="n_stun.errors.minlength">
+              Enter a valid STUN server following: (stun:)&lt;address&gt;:&lt;port&gt;
+            </div>
+          </div>
+          <br/>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="n_cb3" [(ngModel)]="userForm.useTURN">
+            <label class="form-check-label" for="n_cb3">
+              Use a TURN server
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="n_cb4" [disabled]="!(userForm.useTURN)" [(ngModel)]="userForm.useCustomTURN">
+            <label class="form-check-label" for="n_cb4">
+              Use a custom TURN server
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="n_turn" class="col-form-label">Custom TURN server:</label>
+            <input
+                  type="text"
+                  class="form-control"
+                  name="n_turn"
+                  [(ngModel)]="userForm.customTURNurl"
+                  [disabled]="!(userForm.useTURN && userForm.useCustomTURN)"
+                  minlength="5"
+                  #n_turn="ngModel"
+                />
+          </div>
+          <div class="alert-danger m-2 p-2" *ngIf="n_turn.errors">
+            <div *ngIf="n_turn.errors.minlength">
+              Enter a valid TURN server following: (turn:)&lt;address&gt;:&lt;port&gt;
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="n_turn_usr" class="col-form-label">TURN server username:</label>
+            <input
+                  type="text"
+                  class="form-control"
+                  name="n_turn_usr"
+                  [(ngModel)]="userForm.customTURNuser"
+                  [disabled]="!(userForm.useTURN && userForm.useCustomTURN)"
+                />
+          </div>
+          <div class="form-group">
+            <label for="n_turn_pwd" class="col-form-label">TURN server password:</label>
+            <input
+                  type="text"
+                  class="form-control"
+                  name="n_turn_pwd"
+                  [(ngModel)]="userForm.customTURNpwd"
+                  [disabled]="!(userForm.useTURN && userForm.useCustomTURN)"
+                />
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span>Other</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="o_cb1" [(ngModel)]="userForm.saveUserConfig">
+            <label class="form-check-label" for="o_cb1">
+              Remember choices
+            </label>
+          </div>
+          <div>
+            <button class="btn btn-danger p-2 m-2" (click)="resetConfig()">Restore to defaults</button>
+            <button class="btn btn-danger p-2 m-2" (click)="resetStorage()">Reset site</button>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="!isValidInfo()" (click)="getUserInfo()">
+      Next
+    </button>
+  </div>
