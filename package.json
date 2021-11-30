@@ -60,7 +60,7 @@
     "ts-node": "*",
     "typescript": "^4.2.4",
     "browserify": "17.0.0",
-    "uglifyjs": "2.4.11-node8"
+    "uglify-js": "3.14.3"
   },
   "browser": {
     "stream": false
