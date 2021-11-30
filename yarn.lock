@@ -7508,10 +7508,10 @@ typescript@^4.2.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.2.tgz#8ac1fba9f52256fdb06fb89e4122fa6a346c2998"
   integrity sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==
 
-uglifyjs@2.4.11-node8:
-  version "2.4.11-node8"
-  resolved "https://registry.yarnpkg.com/uglifyjs/-/uglifyjs-2.4.11-node8.tgz#bd67baacd6e6be3760f1d7a27967cf2291d4b386"
-  integrity sha512-wymfPXeEwH5L0X3ZACFK/rOK64W68XNTECybxZLaMBEi2MooB9xf3hLCSGXDYH1nd9nS6kMk1jJQzjhhZVjw5A==
+uglify-js@3.14.3:
+  version "3.14.3"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.14.3.tgz#c0f25dfea1e8e5323eccf59610be08b6043c15cf"
+  integrity sha512-mic3aOdiq01DuSVx0TseaEzMIVqebMZ0Z3vaeDhFEh9bsc24hV1TFvN74reA2vs08D0ZWfNjAcJ3UbVLaBss+g==
 
 umd@^3.0.0:
   version "3.0.3"

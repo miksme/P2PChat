@@ -15,8 +15,8 @@ export class SysConfig {
 
   public static readonly SFU_MSG_HISTORY = 0 // Does not and probably will not do anything
 
-  public static readonly STUNSERVER = [{ urls: 'stun:stun.l.google.com:19302' }]
-  public static readonly TURNSERVER = [{}]
+  public static readonly STUNSERVER:any = [{ urls: 'stun:stun.l.google.com:19302' }]
+  public static readonly TURNSERVER:any = []
 }
 /**
  * Does change depending on the browser/user choices
