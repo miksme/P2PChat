@@ -7,7 +7,8 @@
   "sideEffects": false,
   "private": true,
   "scripts": {
-    "build": "ng build --configuration production --aot true --output-hashing none && cd build && browserify ./runtime.js ./polyfills.js ./scripts.js ./main.js | uglifyjs > bundle.js && rm index.html runtime.js scripts.js polyfills.js main.js && cd .."
+    "build": "ng build --configuration production --aot true --output-hashing none && cd build && browserify ./runtime.js ./polyfills.js ./scripts.js ./main.js | uglifyjs > bundle.js && rm index.html runtime.js scripts.js polyfills.js main.js && cd ..",
+    "build:win": "ng build --configuration production --aot true --output-hashing none && cd build && browserify ./runtime.js ./polyfills.js ./scripts.js ./main.js | uglifyjs > bundle.js && del index.html runtime.js scripts.js polyfills.js main.js && cd .."
   },
   "dependencies": {
     "@angular/animations": "^13.0.*",
